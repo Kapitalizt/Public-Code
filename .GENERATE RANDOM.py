@@ -1,4 +1,6 @@
-import random
+import random 
+from random import seed
+from random import randint
 import string
 import pyperclip
 from easygui import *
@@ -40,11 +42,15 @@ def punctuation(n):
 
 # 6 NUMBER ARRAY
 def num_array(n):
-    #Generate 1000 random numbers between 1 and 5000000
-    output = random.sample(range(n[1], n[2]), n[0])
+    seed(1)
+    n1, n2, n3 = n
+    output = []
+    #output = random.sample(range(n2, n3), n1)
+    for i in range(n1):
+        value = randint(n2, n3)
+        output.append(value)
     #print(output)
     output = ' '.join(map(str,output))
-    
     pyperclip.copy(output)
 
 def select():
@@ -69,6 +75,8 @@ def select():
         punctuation(char_num_select())
     elif choice == "Array of Numbers":
         num_array(array_num_select())
+    else:
+        quit()
   
 def char_num_select():
     # message to be displayed
@@ -76,9 +84,11 @@ def char_num_select():
     # window title
     title = "Character Number Entry"
     # default text
-    d_text = ""
     # creating a enter box
-    num = int(enterbox(text, title, d_text))
+    num = enterbox(text, title)
+    if num == None:
+        quit()
+    num = int(num)
     return num
 
 def array_num_select():
@@ -92,6 +102,8 @@ def array_num_select():
     default_list = ["1", "1", "10"]
     # creating a integer box
     output = multenterbox(text, title, input_list, default_list)
+    if output == None:
+        quit()
     output = list(map(int, output))
     n1, *n = output
     n2 = min(n)
