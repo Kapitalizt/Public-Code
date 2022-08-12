@@ -3,7 +3,9 @@ from random import seed
 from random import randint
 import string
 import pyperclip
-from easygui import *
+from easygui import choicebox
+from easygui import enterbox
+from easygui import multenterbox
 
 # 1 LOWERCASE
 def lower(n):
@@ -45,7 +47,6 @@ def num_array(n):
     seed(1)
     n1, n2, n3 = n
     output = []
-    #output = random.sample(range(n2, n3), n1)
     for i in range(n1):
         value = randint(n2, n3)
         output.append(value)
@@ -54,13 +55,9 @@ def num_array(n):
     pyperclip.copy(output)
 
 def select():
-    # message to be displayed
-    text = "Selected any one item"
-    # window title
-    title = "Window Title GfG"
-    # item choices
+    text = "Choose your preferred function:"
+    title = "Function Selection"
     choices = ["Lowercase Only", "Uppercase Only", "All Letters", "Digits Only", "Punctuation Only","Array of Numbers"]
-    # creating a button box
     choice = choicebox(text, title, choices)
 
     if choice == "Lowercase Only":
@@ -79,12 +76,8 @@ def select():
         quit()
   
 def char_num_select():
-    # message to be displayed
     text = "Specify the number of characters to generate."
-    # window title
     title = "Character Number Entry"
-    # default text
-    # creating a enter box
     num = enterbox(text, title)
     if num == None:
         quit()
@@ -92,15 +85,10 @@ def char_num_select():
     return num
 
 def array_num_select():
-    # message to be displayed
     text = "Select how many numbers to be generated and between what range they may fall."
-    # window title
     title = "Array Number Entry"
-    # list of multiple inputs
     input_list = ["Size of Array", "Lower Bound", "Upper Bound"]
-    # list of default text
     default_list = ["1", "1", "10"]
-    # creating a integer box
     output = multenterbox(text, title, input_list, default_list)
     if output == None:
         quit()
@@ -111,16 +99,5 @@ def array_num_select():
     output = [n1,n2,n3]
     return output
  
-#choice = int(input())
-#num = int(input())
-"""
-# title for the message box
-title = "Message Box"
-# message
-message = "You selected : " + str(choice) + \n\n" + 
-# creating a message box 
-msg = msgbox(message, title)
-"""
-
 if __name__ == "__main__":
     select()
